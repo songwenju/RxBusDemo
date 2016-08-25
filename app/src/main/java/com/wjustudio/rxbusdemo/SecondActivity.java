@@ -16,6 +16,7 @@ public class SecondActivity extends Activity{
     }
 
     public void calc(View view){
-        RxBus.getInstance().send(new CalculateEvent(""+ 3 * 2));
+        RxBus.getInstance().send(new CalculateEvent("from RxBus：3 * 2 = "+ 3 * 2));
+        finish();
     }
 }

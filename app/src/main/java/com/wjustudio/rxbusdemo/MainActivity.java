@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -16,11 +17,13 @@ public class MainActivity extends AppCompatActivity {
      * 订阅事件
      */
     private CompositeSubscription rxSubscriptions = new CompositeSubscription();
+    private TextView mTvResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTvResult = (TextView) findViewById(R.id.tv_result);
         //订阅下载事件
         subscribeDownloadEvent();
     }
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void call(CalculateEvent calculateEvent) {
                         Log.i(TAG, "MainActivity.call." + calculateEvent.toString());
+                        mTvResult.setText(calculateEvent.getResult());
                     }
                 }));
     }
